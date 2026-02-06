@@ -3,19 +3,61 @@
 Status: Binding
 
 ## Minimum
+
 k ≥ 3 verplicht.
 
+k = 1 → geen redundantie  
+k = 2 → geen consensus mogelijk
+
+---
+
+## k Groei
+
+k mag groeien zonder architectuurwijziging.
+
+Consensuslogica mag niet afhangen van exact k.
+
+---
+
 ## Pad Onafhankelijkheid
-Elke run gebruikt een nieuwe kernel instantie.
-Geen gedeelde mutable state.
+
+Elke pad-run:
+
+- nieuwe kernel instantie
+- geen gedeelde mutable state
+- geen gedeelde buffers
+
+---
 
 ## Toegestane Variatie
-Alleen numerieke afrondingsverschillen.
+
+Pads mogen verschillen in:
+
+- floating rounding
+- numerieke drift
+
+Niet in:
+
+- algoritme
+- configuratie
+- α bron
+
+---
 
 ## Niet Toegestaan
-- pad-weighting
-- pad-learning
-- adaptive consensus
 
-## Consensus is Rapportage
-Consensus corrigeert niets — rapporteert alleen.
+- pad-specifieke heuristiek
+- adaptive pad weighting
+- pad learning
+
+---
+
+## Consensus is Niet Correctie
+
+Consensus mag nooit:
+
+- waarden aanpassen
+- waarden vervangen
+- waarden middelen
+
+Alleen rapporteren.
