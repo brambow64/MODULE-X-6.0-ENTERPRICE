@@ -3,23 +3,67 @@
 Status: Canonical
 
 ## Doel
-Numerieke data projecteren naar structurele vormen zonder informatieverlies.
 
-## Regel
-Projectie = herordening, geen reductie.
+Numerieke outputs projecteren naar structurele vormen
+zonder informatieverlies en zonder semantiek.
 
-## Grid
-Array → N×N waar mogelijk.
-Geen stille truncatie.
+---
 
-## Metrics
+## Basisregel
+
+Projectie = herordening  
+Niet = reductie
+
+---
+
+## Grid Projectie
+
+Array → N×N grid waar mogelijk.
+
+Als geen perfect vierkant:
+
+toegestaan:
+- expliciete reshape strategie
+- remainder apart rapporteren
+
+niet toegestaan:
+- stille truncatie
+
+---
+
+## Structure Metrics
+
 Toegestaan:
-- row/column sums
+
+- row sums
+- column sums
 - rank
 - singular values
+- determinant (waar mogelijk)
 
 Niet toegestaan:
+
 - patroonlabels
+- classificatie
+
+---
 
 ## Determinisme
-Zelfde input → zelfde projectie.
+
+Projectie moet:
+
+zelfde input → zelfde grid
+
+geen random padding
+
+---
+
+## Output
+
+Moet bevatten:
+
+grid_dimensions  
+checksums  
+structure_metrics  
+anomaly_coordinates (structureel)
+
