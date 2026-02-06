@@ -1,19 +1,40 @@
-# Determinism Audit Spec
+Module X — Determinism Audit Rules
+Doel
 
-Regel: Zelfde input → zelfde output hash.
+Controle op volledige reproduceerbaarheid.
 
-Procedure:
-- Run pipeline 100×
-- Verzamel canonical_hash
-- Set grootte moet = 1 zijn
+Test Procedure
 
-Verboden:
-- random
-- time
-- uuid
-- unordered serialization
+Zelfde run:
 
-Verplicht:
-- canonical json
-- vaste decimal precisie
-- sort_keys=True
+run pipeline N keer
+
+
+Controle:
+
+alle final_hash gelijk
+alle layer_hash gelijk
+
+Minimale N
+N ≥ 5
+
+
+Aanbevolen:
+
+N ≥ 50
+
+Determinisme Schending
+
+Schending wanneer:
+
+hash mismatch
+output shape mismatch
+schema mismatch
+
+Verboden Bronnen
+time()
+datetime
+uuid
+random
+os entropy
+thread order afhankelijkheid
