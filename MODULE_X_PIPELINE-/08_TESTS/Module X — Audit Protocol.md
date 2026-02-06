@@ -69,3 +69,7 @@ hash break
 schema mismatch
 laag skip
 write-back detectie
+
+schema mismatch
+laag skip
+write-back detectie
