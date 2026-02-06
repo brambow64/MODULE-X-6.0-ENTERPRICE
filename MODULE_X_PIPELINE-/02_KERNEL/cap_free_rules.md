@@ -1,36 +1,70 @@
-# Module X — Cap Free Flow Rules (Ultra Volledig)
+# Module X — Cap Free Flow Rules
 
-Status: Bindend
+Status: Binding
 
 ## Kernregel
-Geen enkele kernel- of onderlaag mag datalimieten opleggen.
+
+De kernel en onderliggende lagen mogen GEEN datalimieten opleggen.
+
+Alles wat binnenkomt wordt volledig verwerkt.
+
+---
 
 ## Verboden
+
+Niet toegestaan:
+
 - max_iterations
 - max_samples
-- buffer_caps
-- truncation
-- slicing caps
+- buffer_limit
+- truncate()
+- slice caps
 - clipping op lengte
 
-## Toegestaan
-- Monitoring
-- Metrics
-- Waarschuwingen
-- Fail bij resource-uitputting
+---
 
-## Monitoring ≠ Limiting
-Wel:
+## Toegestaan
+
+Wel toegestaan:
+
+- geheugenfout → fail
+- monitoring metrics
+- waarschuwingen
+- externe orchestrator limits
+
+---
+
+## Monitoring vs Limiting
+
+Toegestaan:
+
     size = len(data)
 
-Niet:
+Niet toegestaan:
+
     if size > MAX: data = data[:MAX]
 
-## Grid Uitzondering
-Alleen vormaanpassing met expliciete documentatie — geen stille datareductie.
+---
 
-## Audit
-Codebase grep-regels:
+## Grid Projectie Uitzondering
+
+Alleen toegestaan:
+
+herstructurering zonder informatieverlies  
+of expliciet gedocumenteerde vormaanpassing.
+
+Geen stille truncatie.
+
+---
+
+## Audit Regel
+
+Code moet slagen:
+
+grep max_ → geen hits  
+grep truncate → geen hits  
+grep limit → alleen monitoring context
+
 - geen max_* caps
 - geen truncate calls
 - limit alleen in monitoring-context
