@@ -1,19 +1,64 @@
-# HASH CHAIN REGELS — PIPELINE
+Module X — Hash Chain Rules
+Doel
 
-Definitie:
-Elke laag levert een hash.
-De pipeline hash is de concatenatie‑hash van alle layer hashes.
+Alle versies en lagen moeten gekoppeld zijn via hash chain discipline.
 
-Formule:
+Hash Chain Principe
 
-H_total = SHA256(H1 + H2 + H3 + ... + Hn)
+Elke laag output bevat:
 
-Eigenschappen:
-- Elke laag beïnvloedt eindhash
-- Geen verborgen mutatie mogelijk
-- Volledig auditbaar
+self_hash
+parent_hash
+chain_hash
 
-Verboden:
-- Random salt
-- Timestamp input
-- Volgorde variatie
+Definitie
+self_hash = hash(current_layer_output)
+chain_hash = hash(parent_hash + self_hash)
+
+Verboden
+hash overschrijven
+hash herberekenen met andere regels
+hash skippen
+
+Parent Hash Bron
+
+Parent hash komt uit:
+
+direct vorige laag
+
+
+Niet:
+
+opnieuw berekend
+samengevoegd
+gemiddeld
+
+Version Hash
+
+Elke version map heeft:
+
+version_root_hash
+
+
+Gebaseerd op:
+
+alle layer chain_hash waarden
+
+Hash Algoritme
+SHA-256
+
+
+Altijd hetzelfde.
+
+Hash Canonicalisatie
+
+Hash wordt altijd berekend over:
+
+canonical json string
+
+
+Niet over:
+
+memory object
+dict object
+runtime object
