@@ -1,99 +1,123 @@
-# Module X — Alpha Usage Rules
+# Module X — Constitution Rules
 
-Status: Binding  
-Scope: Alle lagen
-
----
-
-## 1. Enige Toegang
-
-α mag alleen verkregen worden via:
-
-    get_alpha()
-
-of
-
-    resolve_alpha()
-
-Geen andere routes toegestaan.
+Status: Canonical Discipline  
+Toepassing: Alle lagen
 
 ---
 
-## 2. Verboden
+## 1. Determinisme
+
+Zelfde input → zelfde output → zelfde hash
+
+Verboden:
+
+- random
+- wall clock
+- netwerkdata
+- thread timing afhankelijkheid
+
+---
+
+## 2. Geen Semantiek
+
+Modules:
+
+- interpreteren niet
+- labelen niet
+- classificeren niet
+- concluderen niet
+
+Alleen:
+
+- meten
+- transformeren
+- structureren
+
+---
+
+## 3. Geen Flow Caps
 
 Niet toegestaan:
 
-- α als literal in code
-- α in config bestanden
-- α in environment behalve unlock key
-- α in logs
-- α in error messages
-- α in test fixtures
-- α in comments met volledige waarde
+- max_iterations
+- buffer_limits
+- truncation
+- clipping
+
+Wel toegestaan:
+
+- monitoring
+- metrics
+- waarschuwingen
 
 ---
 
-## 3. Representatie
+## 4. Stateless
 
-Intern:
+Per run:
 
-- Decimal
-
-Berekening:
-
-- float toegestaan
-- alleen na gedocumenteerde downcast
-
-Opslag:
-
-- nooit float-only
+- geen persistente state
+- geen cross-run geheugen
+- geen leercurves
+- geen adaptatie
 
 ---
 
-## 4. Precisie Discipline
+## 5. Eénrichtingsverkeer
 
-- Decimal context vooraf gezet
-- geen automatische rounding
-- geen exponent notatie in output
-- vaste string formatting
+Lagen:
 
----
+input → verwerking → output
 
-## 5. Audit Regel
+Niet toegestaan:
 
-Elke downcast:
-
-    Decimal → float
-
-moet:
-
-- expliciet
-- gelogd (structureel)
-- reproduceerbaar
+- write-back
+- feedback loops
+- mutatie van vorige lagen
 
 ---
 
-## 6. Test Regel
+## 6. Read-Only Integratie
 
-Codebase moet slagen:
+Hogere lagen:
 
-    grep "137." → GEEN hits
-
-(behalve in sealed generator tool)
-
----
-
-## 7. Pipeline Regel
-
-Alle lagen ontvangen α via dependency — nooit hardcoded.
+- lezen outputs
+- wijzigen niets
+- schrijven niets terug
 
 ---
 
-Einde regels.
+## 7. Canonical Output
 
+Output:
 
-## Canonical Output
-JSON, vaste structuur, gesorteerde keys.
+- JSON
+- vaste structuur
+- gesorteerde keys
+- reproduceerbare formatting
 
-## Kernbescherming
-Sealed constant + provider discipline is verplicht.
+---
+
+## 8. Auditbaarheid
+
+Elke laag:
+
+- heeft hash
+- heeft schema
+- heeft validatie
+
+---
+
+## 9. Kernbescherming
+
+Foundation:
+
+- sealed constant
+- provider discipline
+- adapter toegang
+
+Niet onderhandelbaar.
+
+---
+
+Einde constitutie.
