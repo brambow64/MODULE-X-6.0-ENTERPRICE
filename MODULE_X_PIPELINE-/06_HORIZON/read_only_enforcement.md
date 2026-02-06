@@ -1,13 +1,42 @@
-# READ ONLY ENFORCEMENT
+Horizon Read-Only Enforcement Rules
+Doel
 
-Mechanismen:
-- Deep copy bij laden
-- Immutable structuren
-- Tuple conversie voor lijsten
-- Dict freeze
+Horizon mag nooit lagere lagen beïnvloeden.
 
-Validatie:
-- Voor en na skill-run hash vergelijking
-- Mutatie = hard fail
+Read-Only principe
 
-Geen uitzonderingen toegestaan.
+Alle inputs worden behandeld als immutable.
+
+Bij inname:
+
+deep_copy()
+freeze()
+
+Mutatie detectie
+
+Na verwerking:
+
+compare(original, frozen_copy)
+
+
+Verschil → violation.
+
+Immutable regels
+dict → immutable map
+list → tuple
+set → frozenset
+
+Verboden operaties
+in-place wijziging
+pointer wijziging
+object reference update
+buffer overschrijven
+
+Enforcement resultaat
+
+Bij mutatie:
+
+HORIZON_READ_ONLY_VIOLATION
+
+
+Pipeline stopt.
