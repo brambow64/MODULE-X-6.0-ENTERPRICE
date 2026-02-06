@@ -1,8 +1,51 @@
-# CANONICAL OUTPUT RULES
+Canonical Output Rules — Module X
+Doel
 
-Alle output moet deterministisch serializeerbaar zijn.
-- Keys alfabetisch gesorteerd
-- Decimal als string (geen exponent notatie)
-- json.dumps met sort_keys en vaste separators
+Alle outputs boven META-laag moeten canoniek reproduceerbaar zijn.
 
-Canonical hash = sha256(canonical_json_string)
+Zelfde input → exact zelfde JSON string → exact zelfde hash.
+
+Canonical JSON Regels
+Keys
+
+alfabetisch gesorteerd
+
+case-stabiel
+
+geen dynamische key-namen
+
+Numerieke waarden
+
+Decimal → string
+
+geen exponent notatie
+
+vaste precisie
+
+geen afronding shortcuts
+
+JSON serialisatie
+json.dumps(
+  obj,
+  sort_keys=True,
+  separators=(",",":")
+)
+
+Verboden
+
+pretty print
+
+whitespace formatting
+
+runtime timestamp velden
+
+locale formatting
+
+Canonical hash input
+
+Hash wordt berekend over:
+
+canonical_json_string
+
+
+Niet over object. Niet over dict. Alleen over canonical string.
