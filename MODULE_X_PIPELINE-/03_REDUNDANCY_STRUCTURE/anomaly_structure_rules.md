@@ -3,17 +3,55 @@
 Status: Binding
 
 ## Definitie
-Anomalie = structurele afwijking, niet betekenis.
 
-## Detectie
-Alleen numeriek/structureel:
-- correlatie
-- normverschil
-- hash mismatch
+Anomalie = structurele afwijking  
+Niet = betekenisvolle afwijking
 
-## Verboden
-- betekenislabels
-- interpretatie
+---
+
+## Detectie Basis
+
+Alleen toegestaan:
+
+- numerieke afwijking
+- correlatie drop
+- norm verschil
+- structure mismatch
+
+---
+
+## Verboden Detectie
+
+Niet toegestaan:
+
+- betekenis detectie
+- patroon naamgeving
+- categorie labels
+
+---
+
+## Drempels
+
+Drempels moeten:
+
+- numeriek
+- configureerbaar
+- gedocumenteerd
+
+Niet adaptief lerend.
+
+---
 
 ## Rapportage
-Alleen indices, scores, magnitude.
+
+Rapporteer:
+
+indices  
+scores  
+magnitude  
+
+Niet:
+
+oorzaak  
+interpretatie  
+impact
